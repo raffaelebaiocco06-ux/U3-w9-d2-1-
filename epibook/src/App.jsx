@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Epinav from "./components/Navbarm";
 import MyFooter from "./components/Myfooter";
 import AlertDismissible from "./components/Welcome";
-import Cardbook from "./components/Allthebooks";
+// import Cardbook from "./components/Allthebooks";
 import BookList from "./components/BookList";
 //in mezzo
 function App() {
