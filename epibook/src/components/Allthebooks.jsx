@@ -15,7 +15,7 @@ function Cardbook() {
                 <Card.Text>
                   {libro.category} - {libro.price}€
                 </Card.Text>
-                <Button variant="primary">COMPRA</Button>
+                <Button variant="success">COMPRA</Button>
               </Card.Body>
             </Card>
           </div>
