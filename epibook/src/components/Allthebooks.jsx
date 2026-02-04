@@ -8,7 +8,7 @@ function Cardbook() {
       {Libri.map((libro) => {
         return (
           <div className="col-12 col-md-3" key={libro.asin}>
-            <Card>
+            <Card className="h-100">
               <Card.Img variant="top" src={libro.img} />
               <Card.Body>
                 <Card.Title>{libro.title}</Card.Title>
