@@ -1,9 +1,12 @@
-const CommentList = ({ comments }) => {
+import { ListGroup } from "react-bootstrap";
+import Singlecomment from "./Singlecomment";
+
+const CommentList = ({ comment }) => {
   return (
     <ListGroup>
-      {comments.map((commento) => (
-        <Singlecomment key={commento._id} Testo={commento} />
-      ))}
+      {comment.map((commento) => {
+        return <Singlecomment key={commento._id} Testo={commento} />;
+      })}
     </ListGroup>
   );
 };

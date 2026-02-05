@@ -1,6 +1,7 @@
 import { Component } from "react";
-import { ListGroup, Spinner, Alert } from "react-bootstrap";
 import CommentList from "./CommentList";
+// devo fare limport di addcomment list
+import Addcomment from "./AddComment";
 
 class CommentArea extends Component {
   state = {
@@ -41,7 +42,8 @@ class CommentArea extends Component {
     return (
       <div className="comment-area">
         {/*qui di devono inserire   CommentsList and AddComment. */}
-        <CommentList comment={this.state.comments} />
+        <CommentList key={this.state.comments._id} comment={this.state.comments} />
+        <Addcomment key={this.state.comments._id} />
       </div>
     );
   }
