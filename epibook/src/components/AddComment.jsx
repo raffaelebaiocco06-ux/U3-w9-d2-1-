@@ -6,46 +6,54 @@ class AddComment extends Component {
     comment: {
       comment: "",
       rate: "1",
-      elementId: this.props.asin, // L'ID del libro passato dal padre
+      elementId: this.props.asin,
     },
   };
 
-  sendComment = async (e) => {
+  sendComment = (e) => {
     e.preventDefault();
-    try {
-      let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
-        method: "POST",
-        body: JSON.stringify(this.state.comment),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer IL_TUO_TOKEN_QUI",
-        },
+
+    // Inizio della fetch con sintassi .then()
+    fetch("https://striveschool-api.herokuapp.com/api/comments/", {
+      method: "POST",
+      body: JSON.stringify(this.state.comment),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTg0OTY4MzgwMjA2ODAwMTUwNGRjNWUiLCJpYXQiOjE3NzAyOTY5NjMsImV4cCI6MTc3MTUwNjU2M30.Xn_vgSgC-ty-Yo3M4wipT0vED_aVgYp7leMvdOg-boY",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Se la risposta è positiva, puliamo il form
+          alert("Commento inviato con successo!");
+          this.setState({
+            comment: {
+              comment: "",
+              rate: "1",
+              elementId: this.props.asin,
+            },
+          });
+        } else {
+          // Se il server risponde con un errore (es. 400 o 401)
+          throw new Error("Errore durante l'invio del commento");
+        }
+      })
+      .catch((error) => {
+        // Gestione degli errori di rete o errori lanciati sopra
+        console.error("Errore:", error);
+        alert("Si è verificato un errore: " + error.message);
       });
-      if (response.ok) {
-        alert("Commento inviato con successo!");
-        this.setState({
-          comment: {
-            comment: "",
-            rate: "1",
-            elementId: this.props.asin,
-          },
-        });
-      } else {
-        throw new Error("Qualcosa è andato storto");
-      }
-    } catch (error) {
-      alert(error);
-    }
   };
 
   render() {
     return (
       <Form className="mt-3" onSubmit={this.sendComment}>
         <Form.Group className="mb-2">
-          <Form.Label>Recensione</Form.Label>
+          <Form.Label>La tua recensione</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Scrivi qui il tuo commento..."
+            placeholder="Scrivi qui..."
             value={this.state.comment.comment}
             onChange={(e) =>
               this.setState({
@@ -79,7 +87,7 @@ class AddComment extends Component {
           </Form.Select>
         </Form.Group>
         <Button variant="primary" type="submit">
-          Invia Recensione
+          Invia
         </Button>
       </Form>
     );
